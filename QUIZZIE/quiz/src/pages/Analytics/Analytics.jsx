@@ -21,7 +21,7 @@ const Analytics = () => {
     (async function () {
       try {
         const response = await axios.get(
-          "https://quizzie-app-0bl5.onrender.com/api/quiz/getallquizzes", 
+          "https://quizz-finalproject-1.onrender.com/api/quiz/getallquizzes",
           {
             headers: {
               "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const Analytics = () => {
   const handleShare = (e) => {
     const { id } = e.target;
     navigator.clipboard
-      .writeText(`https://quizzie-app-4623f.web.app/quizexam/${id}`) 
+      .writeText(`https://quizzie-app-4623f.web.app/quizexam/${id}`)
       .then(() => {
         toast.success("Link Copied to Clipboard!");
       })

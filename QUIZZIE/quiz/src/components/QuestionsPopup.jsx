@@ -27,7 +27,7 @@ const QuestionsPopup = ({
         if (editId) {
           try {
             const response = await axios.get(
-              `https://quizzie-app-0bl5.onrender.com/api/quiz/getaquiz/${editId}`
+              `https://quizz-finalproject-1.onrender.com/api/quiz/getaquiz/${editId}`
             );
             if (response.status === 200) {
               const data = response.data;
@@ -175,7 +175,7 @@ const QuestionsPopup = ({
     newquestions[selectedIndex] = {
       ...newquestions[selectedIndex],
       options: newoptions,
-      correctoptionindex:null
+      correctoptionindex: null,
     };
     setquizData((prevquizData) => {
       return {
@@ -238,7 +238,7 @@ const QuestionsPopup = ({
 
     try {
       const response = await axios.post(
-        "https://quizzie-app-0bl5.onrender.com/api/quiz/createquiz",
+        "https://quizz-finalproject-1.onrender.com/api/quiz/createquiz",
         quizData,
         {
           headers: {
@@ -277,7 +277,8 @@ const QuestionsPopup = ({
     for (const question of quizData.questions) {
       if (
         !question?.questiontext ||
-        (quizData?.quiztype == "Q&A" && question?.correctoptionindex===null) ||
+        (quizData?.quiztype == "Q&A" &&
+          question?.correctoptionindex === null) ||
         !question?.options.every((option) => {
           if (quizData.optiontype === "text") {
             return option.optionText.trim() !== "";
@@ -298,7 +299,7 @@ const QuestionsPopup = ({
 
     try {
       const response = await axios.patch(
-        `https://quizzie-app-0bl5.onrender.com/api/quiz/editquiz/${editId}`,
+        `https://quizz-finalproject-1.onrender.com/api/quiz/editquiz/${editId}`,
         quizData,
         {
           headers: {
@@ -586,5 +587,3 @@ QuestionsPopup.propTypes = {
 };
 
 export default QuestionsPopup;
-
-

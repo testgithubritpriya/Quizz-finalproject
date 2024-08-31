@@ -22,7 +22,7 @@ export const QuizExam = () => {
       (async () => {
         try {
           const response = await axios.get(
-            `https://quizzie-app-0bl5.onrender.com/api/quiz/getaquiz/${id}`
+            `https://quizz-finalproject-1.onrender.com/api/quiz/getaquiz/${id}`
           );
           setquizData(response.data);
           setQuestions(response.data.questions);
@@ -34,7 +34,7 @@ export const QuizExam = () => {
       (async () => {
         try {
           await axios.patch(
-            `https://quizzie-app-0bl5.onrender.com/api/quiz/impression/${id}`
+            `https://quizz-finalproject-1.onrender.com/api/quiz/impression/${id}`
           );
         } catch (error) {
           console.log(error);
@@ -58,15 +58,21 @@ export const QuizExam = () => {
   const handleNextQuestion = async () => {
     setshowTimer(false);
     if (quizData.quiztype === "Q&A") {
-      if (selectedOptionIndex === Questions[currentQuestionindex].correctoptionindex) {
+      if (
+        selectedOptionIndex ===
+        Questions[currentQuestionindex].correctoptionindex
+      ) {
         const newquestions = [...Questions];
-        newquestions[currentQuestionindex].attempt = Questions[currentQuestionindex].attempt + 1;
-        newquestions[currentQuestionindex].correct = Questions[currentQuestionindex].correct + 1;
+        newquestions[currentQuestionindex].attempt =
+          Questions[currentQuestionindex].attempt + 1;
+        newquestions[currentQuestionindex].correct =
+          Questions[currentQuestionindex].correct + 1;
         await setQuestions(newquestions);
         await setScore((prev) => prev + 1);
       } else {
         const newquestion = [...Questions];
-        newquestion[currentQuestionindex].attempt = Questions[currentQuestionindex].attempt + 1;
+        newquestion[currentQuestionindex].attempt =
+          Questions[currentQuestionindex].attempt + 1;
         await setQuestions(newquestion);
       }
     }
@@ -75,14 +81,15 @@ export const QuizExam = () => {
       if (selectedOptionIndex === 0 || selectedOptionIndex) {
         const newquestions = [...Questions];
         newquestions[currentQuestionindex].options[selectedOptionIndex].count =
-          Questions[currentQuestionindex].options[selectedOptionIndex].count + 1;
+          Questions[currentQuestionindex].options[selectedOptionIndex].count +
+          1;
         await setQuestions(newquestions);
       }
     }
 
     try {
       await axios.patch(
-        `https://quizzie-app-0bl5.onrender.com/api/quiz/result/${quizId}`,
+        `https://quizz-finalproject-1.onrender.com/api/quiz/result/${quizId}`,
         Questions
       );
     } catch (error) {
@@ -108,7 +115,6 @@ export const QuizExam = () => {
       setselectedOptionIndex(selectedIndex);
     }
   };
-  
 
   return (
     <div className={styles.main_container}>
@@ -180,7 +186,9 @@ export const QuizExam = () => {
 
           <div className={styles.footer_container}>
             <button onClick={handleNextQuestion}>
-              {currentQuestionindex === Questions.length - 1 ? "Submit" : "Next"}
+              {currentQuestionindex === Questions.length - 1
+                ? "Submit"
+                : "Next"}
             </button>
           </div>
         </div>
