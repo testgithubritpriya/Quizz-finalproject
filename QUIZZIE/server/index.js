@@ -10,25 +10,28 @@ const app = express();
 dotenv.config();
 
 app.use(
-    cors({
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-        credentials: true,
-    })
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+  })
 );
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URL)
-    .then(() => {
-        console.log('Successfully Connected to MongoDB');
-    }).catch((err) => {
-        console.log('Error Connecting to MongoDB', err);
-    })
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => {
+    console.log("Successfully Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.log("Error Connecting to MongoDB", err);
+  });
 
 app.use("/api/auth", userRoutes);
 app.use("/api/quiz", quizRoutes);
+
 app.listen(process.env.PORT || port, () => {
-    console.log(`Server Up and running on port: ${process.env.PORT} `);
+  console.log(`Server Up and running on port: ${process.env.PORT} `);
 });
